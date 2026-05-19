@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @mixin mq-pc {
   @media (min-width: 768px) {
     @content;
@@ -6,6 +7,7 @@
 }
 body {
   font-size: 1.6rem;
+  font-family: "Roboto", sans-serif;
 }
 .wrap-img {
   img {
@@ -144,6 +146,7 @@ body {
       width: 100%;
       font-size: 2.4rem;
       line-height: 1;
+      padding: 8px;
     }
   }
   input {
@@ -156,6 +159,9 @@ body {
 }
 .wrap-sect {
   margin-top: 50px;
+  @include mq-pc {
+    margin-top: 100px;
+  }
 }
 .wrap-hdg {
   display: flex;
@@ -166,6 +172,9 @@ body {
   line-height: 1;
   color: #000000;
   font-weight: 500;
+  @include mq-pc {
+    font-size: 5rem
+  }
 }
 .txt-link {
   a {
@@ -184,6 +193,7 @@ body {
     width: 100%;
   }
   @include mq-pc() {
+    margin-top: 50px;
     > li {
       width: calc(calc(100% - 34px) / 3);
     }
@@ -193,14 +203,19 @@ body {
   padding: 30px 16px 0;
   background-color: #f0f0f0;
   position: relative;
-  border: 1px solid #8b8b8b;
+  border: 1px solid #E6E6E6;
   border-radius: 8px;
+  .head {
+    position: relative;
+  }
   .cnt {
     background-color: #ffffff;
     margin-inline: -16px;
     padding: 26px 16px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
   }
   .type {
     font-size: 1.7rem;
@@ -209,8 +224,8 @@ body {
   }
   .save {
     position: absolute;
-    top: 30px;
-    right: 16px;
+    top: 0;
+    right: 0;
     z-index: 1;
     a {
       display: block;
@@ -225,13 +240,22 @@ body {
   }
   .img-product {
     margin-top: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .name {
-    font-size: 1.4rem;
-    line-height: 1;
-  }
-  .price {
-    margin-top: 4px;
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    span {
+      display: block;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    strong {
+      font-weight: 700;
+    }
     del {
       color: rgba(0, 0, 0, 0.41);
       margin-right: 8px;
@@ -243,12 +267,138 @@ body {
   }
   @include mq-pc {
     .head {
-      height: 314px;
+      height: 284px;
     }
     .img-product {
-      margin-top: 20px;
       width: 238px;
-      height: 214px;
+      height: 270px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      img {
+        object-fit: contain;
+        height: inherit;
+      }
     }
+    .info {
+      span {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+.wrap-btn {
+  &.add-to-cart {
+    > a, button {
+      display: block;
+      background-color: #000000;
+      border-radius: 32px;
+      color: #FFFFFF;
+      font-size: 1.3rem;
+      line-height: 1;
+      padding: 10px 8px;
+      text-decoration: none;
+      padding-right: 34px;
+      position: relative;
+      &:before {
+        content: "";
+        display: block;
+        mask-image: url("/images/icon-bag.svg");
+        mask-position: center center;
+        mask-size: 21px;
+        width: 21px;
+        height: 21px;
+        background-color: #FFFFFF;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 8px;
+        margin: auto;
+      }
+    }
+  }
+  @include mq-pc() {
+    &.add-to-cart {
+      font-size: 1.6rem;
+    }
+  }
+}
+.wrap-bg {
+  background-color: #F0F0F0;
+  padding: 30px 22px;
+  @include mq-pc {
+    padding: 67px 21px;
+  }
+}
+.list-comment {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  > li {
+    width: 100%;
+  }
+  @include mq-pc {
+    margin-top: 50px;
+    gap: 14px;
+    > li {
+      width: calc(calc(100% - 28px) / 3);
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+.wrap-comment {
+  border-radius: 14px;
+  padding: 15px 27px;
+  background-color: #FFFFFF;
+  & + .wrap-comment {
+    margin-top: 14px;
+    flex: 1;
+  }
+  .wrap-img {
+    width: 76px;
+    height: 76px;
+    margin-inline: auto;
+    border-radius: 50%;
+    background-color: #E5E5E5;
+  }
+  .ttl {
+    margin-top: 10px;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+  .desc {
+    margin-top: 10px;
+    font-size: 1.9rem;
+    line-height: 1.2;
+  }
+  @include mq-pc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+.u-fw-bold {
+  font-weight: 700 !important;
+}
+.l-footer {
+  margin-top: 24px;
+  background-color: #000000;
+  padding: 24px 0 63px;
+  .l-inner {
+    text-align: center;
+  }
+  small {
+    font-size: 1.1rem;
+    line-height: 1.2;
+    color: #FFFFFF;
+  }
+  @include mq-pc {
+    margin-top: 100px;
+    padding: 22px 0;
   }
 }
