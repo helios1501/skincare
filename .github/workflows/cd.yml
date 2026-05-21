@@ -1,4 +1,4 @@
-name: Docker CD
+name: Deploy Local Server
 
 on:
   push:
@@ -9,10 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Build Docker Image
-        run: docker build -t myweb .
-
-      - name: Run Container
-        run: docker run -d -p 8080:80 myweb
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd C:/deploy/myweb
+            docker compose down
+            docker compose up -d --build
